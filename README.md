@@ -6,7 +6,7 @@ This browser based web application to ...
 
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
-* Hi, my name Jeff! Hi my name is Samuel. I am so very much excited to embark on this journey called CST!!!!!!!!!!!!!
+* Hi, my name Jeff!
 * Hi, my name is Olivia and I'm excited for what's to come in my time here at BCIT
 * Hi my name is Samuel. I am so very much excited to embark on this journey called CST!!!!!!!!!!!!!
 	
