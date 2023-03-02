@@ -21,18 +21,13 @@ function getNameFromAuth() {
 }
 getNameFromAuth(); //run the function
 
-// Function to read the quote of the day from Firestore "quotes" collection
+// Function to read the message of the day from Firestore "weather message" collection
 // Input param is the String representing the day of the week, aka, the document name
-function readQuote(day) {
-    db.collection("quotes").doc(day)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
-      .onSnapshot(thursdayDoc => {                                                               //arrow notation
-           console.log("current document data: " + thursdayDoc.data());                          //.data() returns data object
-           document.getElementById("quote-goes-here").innerHTML = thursdayDoc.data().quote;      //using javascript to display the data on the right place
-           
-           //Here are other ways to access key-value data fields
-           //$('#quote-goes-here').text(tuesdayDoc.data().quote);         //using jquery object dot notation
-           //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);      //using json object indexing
-		       //document.querySelector("#quote-goes-here").innerHTML = tuesdayDoc.data().quote;
-      })
+function readMessage(weather) {
+  db.collection("weather message").doc(weather)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+    .onSnapshot(rainingDoc => {                                                               //arrow notation
+         console.log("current document data: " + rainingDoc.data());                          //.data() returns data object
+         document.getElementById("message-goes-here").innerHTML = rainingDoc.data().message;      //using javascript to display the data on the right place
+    })
 }
-readQuote("thursday");        //calling the function
+readMessage("raining");        //calling the function
