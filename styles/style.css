@@ -7,9 +7,10 @@
 }
 
 .main-task-cards {
+  box-sizing: border-box;
   background-color:white;
   margin:auto;
-  width:500px;
+  width:70%;
   height:50px;
   padding:50px;
   border: 1px solid black;
@@ -27,27 +28,38 @@
 }
 
 #todays-tasks {
-    font-weight:bold;
+  box-sizing: border-box;
+  font-weight:bold;
 }
 
 
 /*history.html styling*/
 
 #calendar {
+  box-sizing: border-box;
   background-color:white;
   margin:auto;
-  width:300px;
+  width:70%;
   height:200px;
   padding:50px;
   border: 1px solid black;
   font-weight:bold;
 }
 
+#text1 {
+  font-size:large;
+}
+
+#text2 {
+  font-size:xx-large;
+}
+
 /*upload.html styling*/
 #upload-photo {
+  box-sizing: border-box;
   background-color:white;
   margin:auto;
-  width:300px;
+  width:70%;
   height:200px;
   padding:50px;
   border: 1px solid black;
@@ -55,9 +67,10 @@
 }
 
 #image-cards {
+  box-sizing: border-box;
   background-color:white;
   margin:auto;
-  width:150px;
+  width:60%;
   height:250px;
   padding:50px;
   border: 1px solid black;
