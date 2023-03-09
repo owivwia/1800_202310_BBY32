@@ -31,3 +31,4 @@ function readMessage(weather) {
     })
 }
 readMessage("raining");        //calling the function
+
