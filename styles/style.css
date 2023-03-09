@@ -70,13 +70,11 @@
   box-sizing: border-box;
   background-color:white;
   margin:auto;
-  width:60%;
   height:250px;
   padding:50px;
-  border: 1px solid black;
+  border-radius: 17px solid black;
   font-weight:bold;
   box-sizing: border-box;
-  float: left;
   width: 33.33%;
 }
 
