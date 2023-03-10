@@ -28,12 +28,11 @@
 
 .container-fluid div {
   text-align:center;
-  overflow: scroll;
 }
 
 #todays-tasks {
   box-sizing: border-box;
-    font-weight:bold;
+  font-weight:bold;
 }
 
 
