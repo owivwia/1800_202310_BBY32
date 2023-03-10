@@ -15,6 +15,7 @@
   padding:50px;
   border: 1px solid black;
   font-weight:bold;
+  overflow: scroll;
 }
 
 .page-name{
@@ -25,6 +26,7 @@
 
 .container-fluid div {
   text-align:center;
+  overflow: scroll;
 }
 
 #todays-tasks {
@@ -76,6 +78,8 @@
   font-weight:bold;
   box-sizing: border-box;
   width: 33.33%;
+  overflow: auto;
+
 }
 
 #upload {
@@ -85,10 +89,10 @@
 }
 
 footer {
-  position: fixed;
+  display: fixed;
+  position:fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: white;
-  text-align: center;
 }
