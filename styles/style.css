@@ -90,12 +90,14 @@
 }
 
 footer {
-  display: fixed;
   position:fixed;
   left: 0;
-  bottom: -20%;
+  height: 15%;
+  bottom: -5%;
   width: 100%;
   background-color: white;
+  background: rgba(255, 255, 255, 0.527); 
+  border: 0px solid black;
 }
 
 .creativity-task {
@@ -120,11 +122,18 @@ footer {
   padding: 5%;
   float: left;
   padding: 4%;
-  
 }
 
-.btn {
-  position: relative;
-  float:  right;
+input.todo-checkbox {
+  width: 2rem;
+  height: 2rem;
+}
+
+.container{
+  background: rgba(255, 255, 255, 0.527); 
+  border-radius: 10px; 
+  border: 3px solid black;
+  height: 80%;
+  bottom: -20%;
 }
 
