@@ -28,6 +28,7 @@
 
 .container-fluid div {
   text-align:center;
+  overflow: scroll;
 }
 
 #todays-tasks {
@@ -79,6 +80,8 @@
   font-weight:bold;
   box-sizing: border-box;
   width: 33.33%;
+  overflow: auto;
+
 }
 
 #upload {
@@ -88,11 +91,12 @@
 }
 
 footer {
-  position: relative;
+  display: fixed;
+  position:fixed;
   left: 0;
   bottom: -20%;
   width: 100%;
-  text-align: center;
+  background-color: white;
 }
 
 .creativity-task {
