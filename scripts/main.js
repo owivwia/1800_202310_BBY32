@@ -32,3 +32,30 @@ function readMessage(weather) {
 }
 readMessage("raining");        //calling the function
 
+function readCreativityTask(creativityId) {
+  db.collection("creativity tasks").doc(creativityId)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+    .onSnapshot(taskDoc => {                                                               //arrow notation
+         console.log("current document data: " + taskDoc.data());                          //.data() returns data object
+         document.getElementById("creativity-task-goes-here").innerHTML = taskDoc.data().Task;      //using javascript to display the data on the right place
+         
+         //Here are other ways to access key-value data fields
+         //$('#quote-goes-here').text(tuesdayDoc.data().quote);         //using jquery object dot notation
+         //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);      //using json object indexing
+         //document.querySelector("#quote-goes-here").innerHTML = tuesdayDoc.data().quote;
+    })
+}
+readCreativityTask("2");
+
+function readPhysicalTask(physicalId) {
+  db.collection("physical tasks").doc(physicalId)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
+    .onSnapshot(taskDoc => {                                                               //arrow notation
+         console.log("current document data: " + taskDoc.data());                          //.data() returns data object
+         document.getElementById("physical-task-goes-here").innerHTML = taskDoc.data().task;      //using javascript to display the data on the right place
+         
+         //Here are other ways to access key-value data fields
+         //$('#quote-goes-here').text(tuesdayDoc.data().quote);         //using jquery object dot notation
+         //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);      //using json object indexing
+         //document.querySelector("#quote-goes-here").innerHTML = tuesdayDoc.data().quote;
+    })
+}
+readPhysicalTask("2");
