@@ -2,7 +2,7 @@
     background-image: url(../images/snowbackground.jpg);
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     height: 100%;
 }
 
@@ -15,7 +15,6 @@
   padding:50px;
   border: 1px solid black;
   font-weight:bold;
-  overflow: scroll;
 }
 
 .page-name{
@@ -26,7 +25,6 @@
 
 .container-fluid div {
   text-align:center;
-  overflow: scroll;
 }
 
 #todays-tasks {
@@ -94,5 +92,5 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: white;
+  background-color: rgba(28, 151, 192, 0.685);
 }
