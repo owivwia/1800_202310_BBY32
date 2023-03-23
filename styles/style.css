@@ -7,7 +7,7 @@
 } 
 
 .card-title {
-  text-align: left;
+  text-align: center;
   padding: 0.5% 3%;
 }
 
@@ -126,7 +126,7 @@ input.todo-checkbox {
 }
 
 .container-fluid.text-dark.p-5 {
-  height: 100vh;
+  height:auto;
 }
 
 .container{
@@ -135,3 +135,7 @@ input.todo-checkbox {
   height: 80%;
 }
 
+/* temperature.js */
+#description {
+  text-transform: capitalize;
+}
