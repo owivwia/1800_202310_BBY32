@@ -43,7 +43,7 @@
   background-color:white;
   margin:auto;
   width:70%;
-  height:200px;
+  height:40vh;
   padding:50px;
   border: 1px solid black;
   font-weight:bold;
@@ -126,7 +126,7 @@ input.todo-checkbox {
 }
 
 .container-fluid.text-dark.p-5 {
-  height:auto;
+  height:100vh;
 }
 
 .container{
