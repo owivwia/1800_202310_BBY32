@@ -52,53 +52,29 @@
            <div class="container p-5" style="background: rgba(255, 255, 255, 0.527); border-radius: 10px; border: 3px solid black;">
             <h1 class="display-4" style="color: black;">View Personal Posts</span></h1>
             <br>
-               <div id="uploads-go-here" class="row row-cols-auto">
+               <div id="posts-go-here" class="row row-cols-auto">
             </div>
         </div>
-        </div>
-
-    <!-- Templates for general use, not displayed -->
-    <template id="uploadTemplate">
-        <div class="card py-2 mx-2" style="width: 24rem;">
-            <img class="card-image card-img-top" src="images\drink1.png" alt="..." />
-            <div class="card-body">
-                <p class="card-length">Gallery Image 1</p>
-                <h5 class="card-title">MAR 03 2023</h5>
-                <br />
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-                <a class="btn btn-primary card-href"> Details ...</a>
+    
+        <div class="container py-5">
+            <h1>Show My Posts <span id="name-goes-here"></span></h1>
+            <div id="myposts-go-here" class="row row-cols-auto">
             </div>
         </div>
-        <div class="card py-2 mx-2"  style="width: 24rem;">
-            <img class="card-image card-img-top" src="images\drink2.png" alt="..." />
-            <div class="card-body">
-                <p class="card-length">Gallery Image 1</p>
-                <h5 class="card-title">MAR 03 2023</h5>
-                <br />
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-                <a class="btn btn-primary card-href"> Details ...</a>
+    
+        <!-- Templates for general use, not displayed -->
+        <template id="postCardTemplate">
+            <div class="card py-2 mx-2 bg-light" style="width: 10rem;">
+                <img class="card-image card-img-top" src=" ..." alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-description">placeholder</p>
+                    <br>
+                    <a class="btn btn-secondary card-href" id="read-more">Read more ...</a>
+                    <i class="material-icons" id="delete-icon">delete</i>
+                </div>
             </div>
-        </div>
-        <div class="card py-2 mx-2"  style="width: 24rem;">
-            <img class="card-image card-img-top" src="images\drink3.png" alt="..." />
-            <div class="card-body">
-                <p class="card-length">Gallery Image 1</p>
-                <h5 class="card-title">MAR 03 2023</h5>
-                <br />
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
-                </p>
-                <a class="btn btn-primary card-href"> Details ...</a>
-            </div>
-        </div>
-    </template>
+        </template>
 
     <!-- FOOTER -->
     <nav id="footerPlaceholder" style="background: rgba(255, 255, 255, 0.527); border: 0px solid black;"></nav>
@@ -116,4 +92,4 @@
 
 </body>
 
-</html>
+</html>     
