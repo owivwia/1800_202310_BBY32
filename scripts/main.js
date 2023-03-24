@@ -67,3 +67,8 @@ function readPhysicalTask(physicalId) {
 }
 readPhysicalTask(rndInt2.toString());
 
+var date = new Date();
+var year = date.getFullYear();
+var month = date.getMonth() + 1;
+var day = date.getDate();
+document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;

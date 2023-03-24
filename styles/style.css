@@ -135,6 +135,10 @@ input.todo-checkbox {
   height: 80%;
 }
 
+#date-location-temp-description {
+  font-size: 3vmin;
+}
+
 /* temperature.js */
 #description {
   text-transform: capitalize;
