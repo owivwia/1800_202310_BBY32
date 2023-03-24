@@ -32,6 +32,13 @@ function readMessage(weather) {
 }
 readMessage("raining");        //calling the function
 
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+const rndInt1 = randomIntFromInterval(1, 5)
+const rndInt2 = randomIntFromInterval(1, 5)
+
 function readCreativityTask(creativityId) {
   db.collection("creativity tasks").doc(creativityId)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
     .onSnapshot(taskDoc => {                                                               //arrow notation
@@ -44,7 +51,7 @@ function readCreativityTask(creativityId) {
          //document.querySelector("#quote-goes-here").innerHTML = tuesdayDoc.data().quote;
     })
 }
-readCreativityTask("2");
+readCreativityTask(rndInt1.toString());
 
 function readPhysicalTask(physicalId) {
   db.collection("physical tasks").doc(physicalId)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
@@ -58,4 +65,5 @@ function readPhysicalTask(physicalId) {
          //document.querySelector("#quote-goes-here").innerHTML = tuesdayDoc.data().quote;
     })
 }
-readPhysicalTask("2");
+readPhysicalTask(rndInt2.toString());
+
