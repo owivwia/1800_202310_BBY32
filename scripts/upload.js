@@ -89,3 +89,4 @@ function savePostIDforUser(postDocID) {
                 console.error("Failed to save post for the user: ", error);
             });
     })
+  }
