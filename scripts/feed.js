@@ -10,7 +10,7 @@ function showPosts() {
 showPosts();
 
 function displayPostCard(doc) {
-    var title = doc.data().name; // get value of the "name" key
+    var title = doc.data().title; // get value of the "name" key
     var desc = doc.data().description; //gets the length field
     var image = doc.data().image; //the field that contains the URL 
 
