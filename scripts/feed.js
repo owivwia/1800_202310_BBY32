@@ -1,25 +1,15 @@
-function showMyPosts() {
-    firebase.auth().onAuthStateChanged(user => {
-        console.log("user is: " + user.uid);
-        db.collection("users").doc(user.uid)
-            .get()
-            .then(doc => {
-                myposts = doc.data().myposts; //get array of my posts
-                console.log(myposts);
-                myposts.forEach(item => {
-                    db.collection("posts")
-                        .doc(item)
-                        .get()
-                        .then(doc => {
-                            displayMyPostCard(doc);
-                        })
-                })
+function showPosts() {
+    db.collection("posts")
+        .get()
+        .then(snap => {
+            snap.forEach(doc => {
+                displayPostCard(doc);
             })
-    })
+        })
 }
-showMyPosts();
+showPosts();
 
-function displayMyPostCard(doc) {
+function displayPostCard(doc) {
     var title = doc.data().title; // get value of the "name" key
     var desc = doc.data().description; //gets the length field
     var image = doc.data().image; //the field that contains the URL 
@@ -30,12 +20,12 @@ function displayMyPostCard(doc) {
     newcard.querySelector('.card-title').innerHTML = title;
     newcard.querySelector('.card-image').src = image;
     newcard.querySelector('.card-description').innerHTML = desc;
-    newcard.querySelector('#delete-icon').onclick = () => deletePost(doc.id);
-    //newcard.querySelector('#apply-btn').onclick = () => applyNow(doc.data().owner);
+    //newcard.querySelector('#delete-icon').onclick = () => deletePost(doc.id);
 
     //append to the posts
-    document.getElementById("myposts-go-here").append(newcard);
+    document.getElementById("posts-go-here").append(newcard);
 }
+
 
 function insertNameFromFirebase() {
     // to check if the user is logged in:

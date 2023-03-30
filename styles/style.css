@@ -170,21 +170,13 @@ body {
   color: #fff;
   text-decoration: none;
   text-align: center;
-  @include border-radius (4px);
   background-color: rgba(239,239,239,1);
-  @include background-image (linear-gradient(top, rgba(255,255,255,1) 0%,rgba(239,239,239,1) 60%,rgba(225,223,226,1) 100%));
-  @include box-shadow(0 1px 3px #cfcfcf);
   border: 1px solid #bcbcbc;
   border-left: 0;
   color: #888; 
   text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
-	@include single-transition(color,0.1s,linear,0);
 }
 
 .label:hover {
   color: hsl(210, 100%, 40%); 
-}
-.label:active {
-  @include background-image (linear-gradient(top, rgba(230,230,230,1) 0%,rgba(239,239,239,1) 60%,rgba(225,223,226,1) 100%));
-  @include box-shadow(0 0 1px #cfcfcf,inset 0 1px 2px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.7));
 }

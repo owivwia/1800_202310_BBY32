@@ -22,7 +22,9 @@ function savePost() {
             // Do something for the user here. 
             currentUser = user;
             var desc = document.getElementById("description").value;
+            var name = document.getElementById("title").value;
             db.collection("posts").add({
+                title: name,
                 owner: user.uid,
                 description: desc,
                 last_updated: firebase.firestore.FieldValue
