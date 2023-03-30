@@ -1,3 +1,37 @@
+var currentUser;
+
+function doAll() {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      currentUser = db.collection("users").doc(user.uid);
+      console.log(currentUser);
+
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+
+      getNameFromAuth();
+      readCreativityTask(rndInt1.toString());
+      readPhysicalTask(rndInt2.toString());
+      if (weather == "rain") {
+        readMessageRain(rndInt1.toString());
+      } else if (weather == "clear") {
+        readMessageClear(rndInt1.toString());
+      } else {
+        console.log("any other weather");
+      }
+    } else {
+      console.log("No user is signed in");
+      window.location.href = "login.html";
+    }
+  })
+}
+
+doAll();
+
+
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
         // Check if a user is signed in:
@@ -19,20 +53,39 @@ function getNameFromAuth() {
         }
     });
 }
-getNameFromAuth(); //run the function
 
-// Function to read the message of the day from Firestore "weather message" collection
-// Input param is the String representing the day of the week, aka, the document name
-function readMessage(weather) {
-  db.collection("weather message").doc(weather)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
-    .onSnapshot(rainingDoc => {                                                               //arrow notation
-         console.log("current document data: " + rainingDoc.data());                          //.data() returns data object
-         document.getElementById("message-goes-here").innerHTML = rainingDoc.data().message;      //using javascript to display the data on the right place
+var weather;
+
+const getData = async () => {
+  const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=Burnaby&appid=7d6d38173ae18bf5a612fcdf14342cd4");
+  const data = await response.json();
+  weather = data.weather[0].main.toLowerCase();
+  return data;
+};
+
+(async () => {
+  await getData();
+  console.log(weather);
+})();
+
+function readMessageRain(msgId) {
+  db.collection("raining").doc(msgId)                                                      
+    .onSnapshot(rainingDoc => {                                                           
+         console.log("current document data: " + msgId.data());                         
+         document.getElementById("message-goes-here").innerHTML = rainingDoc.data().msg;      
+    })
+} 
+
+function readMessageClear(msgId) {
+  db.collection("clear").doc(msgId)                                                      
+    .onSnapshot(clearDoc => {                                                           
+         console.log("current document data: " + msgId.data());                         
+         document.getElementById("message-goes-here").innerHTML = clearDoc.data().msg;      
     })
 }
-readMessage("raining");        //calling the function
 
-function randomIntFromInterval(min, max) { // min and max included 
+// min and max included 
+function randomIntFromInterval(min, max) { 
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
@@ -40,35 +93,19 @@ const rndInt1 = randomIntFromInterval(1, 5)
 const rndInt2 = randomIntFromInterval(1, 5)
 
 function readCreativityTask(creativityId) {
-  db.collection("creativity tasks").doc(creativityId)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
-    .onSnapshot(taskDoc => {                                                               //arrow notation
-         console.log("current document data: " + taskDoc.data());                          //.data() returns data object
-         document.getElementById("creativity-task-goes-here").innerHTML = taskDoc.data().Task;      //using javascript to display the data on the right place
-         
-         //Here are other ways to access key-value data fields
-         //$('#quote-goes-here').text(tuesdayDoc.data().quote);         //using jquery object dot notation
-         //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);      //using json object indexing
-         //document.querySelector("#quote-goes-here").innerHTML = tuesdayDoc.data().quote;
+  db.collection("creativity tasks").doc(creativityId)                                                     
+    .onSnapshot(taskDoc => {                                                           
+         console.log("current document data: " + taskDoc.data());                         
+         document.getElementById("creativity-task-goes-here").innerHTML = taskDoc.data().Task;      
     })
 }
-readCreativityTask(rndInt1.toString());
+
 
 function readPhysicalTask(physicalId) {
-  db.collection("physical tasks").doc(physicalId)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
-    .onSnapshot(taskDoc => {                                                               //arrow notation
-         console.log("current document data: " + taskDoc.data());                          //.data() returns data object
-         document.getElementById("physical-task-goes-here").innerHTML = taskDoc.data().task;      //using javascript to display the data on the right place
-         
-         //Here are other ways to access key-value data fields
-         //$('#quote-goes-here').text(tuesdayDoc.data().quote);         //using jquery object dot notation
-         //$("#quote-goes-here").text(tuesdayDoc.data()["quote"]);      //using json object indexing
-         //document.querySelector("#quote-goes-here").innerHTML = tuesdayDoc.data().quote;
+  db.collection("physical tasks").doc(physicalId)                                           
+    .onSnapshot(taskDoc => {                                                          
+         console.log("current document data: " + taskDoc.data());                       
+         document.getElementById("physical-task-goes-here").innerHTML = taskDoc.data().task;      
     })
 }
-readPhysicalTask(rndInt2.toString());
 
-var date = new Date();
-var year = date.getFullYear();
-var month = date.getMonth() + 1;
-var day = date.getDate();
-document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
