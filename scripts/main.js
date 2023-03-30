@@ -1,5 +1,13 @@
 var currentUser;
 
+// min and max included 
+function randomIntFromInterval(min, max) { 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+const rndInt1 = randomIntFromInterval(1, 5)
+const rndInt2 = randomIntFromInterval(1, 5)
+
 function doAll() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -15,12 +23,14 @@ function doAll() {
       getNameFromAuth();
       readCreativityTask(rndInt1.toString());
       readPhysicalTask(rndInt2.toString());
-      if (weather == "rain") {
-        readMessageRain(rndInt1.toString());
-      } else if (weather == "clear") {
-        readMessageClear(rndInt1.toString());
+      if (weather === "rain" || weather === "drizzle" || weather == "thunderstorm") {
+        readMessageRainy(rndInt1.toString());
+      } else if (weather === "clear" || weather === "clouds") {
+        readMessageSunny(rndInt1.toString());
+      } else if (weather === "snow") {
+        readMessageSnowy(rndInt1.toString());
       } else {
-        console.log("any other weather");
+        readMessageExtreme(weather === "atmosphere")
       }
     } else {
       console.log("No user is signed in");
@@ -30,7 +40,6 @@ function doAll() {
 }
 
 doAll();
-
 
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
@@ -68,29 +77,29 @@ const getData = async () => {
   console.log(weather);
 })();
 
-function readMessageRain(msgId) {
+function readMessageRainy(msgId) {
   db.collection("raining").doc(msgId)                                                      
     .onSnapshot(rainingDoc => {                                                           
-         console.log("current document data: " + msgId.data());                         
+         console.log("current document data: " + rainingDoc.data());                         
          document.getElementById("message-goes-here").innerHTML = rainingDoc.data().msg;      
     })
 } 
 
-function readMessageClear(msgId) {
-  db.collection("clear").doc(msgId)                                                      
-    .onSnapshot(clearDoc => {                                                           
-         console.log("current document data: " + msgId.data());                         
-         document.getElementById("message-goes-here").innerHTML = clearDoc.data().msg;      
+function readMessageSunny(msgId) {
+  db.collection("sunny").doc(msgId)                                                      
+    .onSnapshot(sunnyDoc => {                                                           
+         console.log("current document data: " + sunnyDoc.data());                         
+         document.getElementById("message-goes-here").innerHTML = sunnyDoc.data().msg;      
     })
 }
 
-// min and max included 
-function randomIntFromInterval(min, max) { 
-  return Math.floor(Math.random() * (max - min + 1) + min)
+function readMessageSnowy(msgId) {
+  db.collection("snowy").doc(msgId)                                                      
+    .onSnapshot(snowyDoc => {                                                           
+        console.log("current document data: " + snowyDoc.data());                         
+        document.getElementById("message-goes-here").innerHTML = snowyDoc.data().msg;      
+    })
 }
-
-const rndInt1 = randomIntFromInterval(1, 5)
-const rndInt2 = randomIntFromInterval(1, 5)
 
 function readCreativityTask(creativityId) {
   db.collection("creativity tasks").doc(creativityId)                                                     
