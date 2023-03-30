@@ -30,7 +30,7 @@ function doAll() {
       } else if (weather === "snow") {
         readMessageSnowy(rndInt1.toString());
       } else {
-        readMessageExtreme(weather === "atmosphere")
+        readMessageExtreme(rndInt1.toString());
       }
     } else {
       console.log("No user is signed in");
@@ -98,6 +98,14 @@ function readMessageSnowy(msgId) {
     .onSnapshot(snowyDoc => {                                                           
         console.log("current document data: " + snowyDoc.data());                         
         document.getElementById("message-goes-here").innerHTML = snowyDoc.data().msg;      
+    })
+}
+
+function readMessageExtreme(msgId) {
+  db.collection("extreme").doc(msgId)                                                      
+    .onSnapshot(extremeDoc => {                                                           
+        console.log("current document data: " + extremeDoc.data());                         
+        document.getElementById("message-goes-here").innerHTML = extremeDoc.data().msg;      
     })
 }
 
