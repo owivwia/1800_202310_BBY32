@@ -132,7 +132,7 @@ input.todo-checkbox {
 .container{
   background: rgba(255, 255, 255, 0.527); 
   border-radius: 10px; border: 3px solid black;
-  height: 80%;
+  height: 100%;
 }
 
 #date-location-temp-description {
