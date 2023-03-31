@@ -2,7 +2,7 @@
     background-image: url(../images/snowbackground.jpg);
     background-position: top;
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     height: 100vh;
     
 } 
@@ -91,12 +91,14 @@
 }
 
 footer {
-  position:fixed;
+  position: fixed;
   bottom: -25px;
   height: 125px;
   width: 100%;
   background-color: white;
   font-size: small;
+  background: rgba(255, 255, 255, 0.78); 
+  border: 0px solid black;
 }
 
 .creativity-task {
