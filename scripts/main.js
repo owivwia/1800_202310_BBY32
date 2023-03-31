@@ -1,12 +1,10 @@
 var currentUser;
+var userId;
 
 // min and max included 
 function randomIntFromInterval(min, max) { 
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
-
-const rndInt1 = randomIntFromInterval(1, 5)
-const rndInt2 = randomIntFromInterval(1, 5)
 
 function doAll() {
   firebase.auth().onAuthStateChanged(user => {
@@ -18,20 +16,65 @@ function doAll() {
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var day = date.getDate();
+
       document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
 
       getNameFromAuth();
-      readCreativityTask(rndInt1.toString());
-      readPhysicalTask(rndInt2.toString());
-      if (weather === "rain" || weather === "drizzle" || weather == "thunderstorm") {
-        readMessageRainy(rndInt1.toString());
-      } else if (weather === "clear" || weather === "clouds") {
-        readMessageSunny(rndInt1.toString());
-      } else if (weather === "snow") {
-        readMessageSnowy(rndInt1.toString());
-      } else {
-        readMessageExtreme(rndInt1.toString());
-      }
+
+      // Read the user's Firestore document to get the last creativity task ID and the date it was generated
+      currentUser.get().then(doc => {
+        if (doc.exists) {
+          const userData = doc.data();
+          const lastTaskId = userData.lastTaskId;
+          const lastTaskDate = userData.lastTaskDate;
+
+          // If the last task date matches today's date, use the same task ID
+          if (lastTaskDate === `${year}-${month}-${day}` && lastTaskId) {
+            readCreativityTask(lastTaskId);
+          } else {
+            // If the last task date is not today's date, generate a new task ID and save it to the user's document
+            const newTaskId = randomIntFromInterval(1, 5).toString();
+            currentUser.update({
+              lastTaskId: newTaskId,
+              lastTaskDate: `${year}-${month}-${day}`
+            }).then(() => {
+              readCreativityTask(newTaskId);
+            }).catch(error => {
+              console.log("Error updating user document:", error);
+            });
+          }
+
+          // If the last task date matches today's date, use the same task ID
+          if (lastTaskDate === `${year}-${month}-${day}` && lastTaskId) {
+            readPhysicalTask(lastTaskId);
+          } else {
+            // If the last task date is not today's date, generate a new task ID and save it to the user's document
+            const newTaskId = randomIntFromInterval(1, 5).toString();
+            currentUser.update({
+              lastTaskId: newTaskId,
+              lastTaskDate: `${year}-${month}-${day}`
+            }).then(() => {
+              readPhysicalTask(newTaskId);
+            }).catch(error => {
+              console.log("Error updating user document:", error);
+            });
+          }
+
+          if (weather === "rain" || weather === "drizzle" || weather == "thunderstorm") {
+            readMessageRainy(rndInt1.toString());
+          } else if (weather === "clear" || weather === "clouds") {
+            readMessageSunny(rndInt1.toString());
+          } else if (weather === "snow") {
+            readMessageSnowy(rndInt1.toString());
+          } else {
+            readMessageExtreme(rndInt1.toString());
+          }
+        } else {
+          console.log("User document not found");
+        }
+      }).catch(error => {
+        console.log("Error getting user document from Firestore:", error);
+      });
     } else {
       console.log("No user is signed in");
       window.location.href = "login.html";
@@ -40,6 +83,7 @@ function doAll() {
 }
 
 doAll();
+
 
 function getNameFromAuth() {
     firebase.auth().onAuthStateChanged(user => {
@@ -116,7 +160,6 @@ function readCreativityTask(creativityId) {
          document.getElementById("creativity-task-goes-here").innerHTML = taskDoc.data().Task;      
     })
 }
-
 
 function readPhysicalTask(physicalId) {
   db.collection("physical tasks").doc(physicalId)                                           
