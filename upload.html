@@ -60,15 +60,12 @@
                     <label>Description</label>
                     <textarea id="description" rows="4" cols="50"></textarea>
                 </div>
-                <div>
-                    <label>Img Title</label>
-                    <textarea id="title" rows="4" cols="50"></textarea>
-                </div>
+               
                 <div class="container py-3">
                     <input type="file" id="mypic-input" accept="image/*" />
                     <img id="mypic-goes-here" width="100" height="100" />
                 </div>
-                <div class="d-flex mt-5">
+                <div class="d-flex mt-5" id="titlebox">
                     <button type="button" class="btn btn-info" onclick="savePost()">Post Now</button>
                 </div>
             </form>
@@ -77,6 +74,7 @@
         </div>
     </div>
 
+    <br><br><br><br>
     <!-- FOOTER -->
     <nav id="footerPlaceholder" style="background: rgba(255, 255, 255, 0.527); border: 0px solid black;"></nav>
     

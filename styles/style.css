@@ -91,10 +91,12 @@
 }
 
 footer {
-  position:relative;
-  height: 15vh;
-  width: 100vw;
+  position:fixed;
+  bottom: -25px;
+  height: 125px;
+  width: 100%;
   background-color: white;
+  font-size: small;
 }
 
 .creativity-task {
@@ -179,4 +181,27 @@ body {
 
 .label:hover {
   color: hsl(210, 100%, 40%); 
+}
+
+#postImage {
+  height: 300px;
+  width: auto;  
+  
+}
+.imagebox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#titlebox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#descbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -22,9 +22,16 @@ function savePost() {
             // Do something for the user here. 
             currentUser = user;
             var desc = document.getElementById("description").value;
-            var name = document.getElementById("title").value;
+            const date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+
+            // This arrangement can be altered based on how we want the date's format to appear.
+            let currentDate = `${month}-${day}-${year}`;
             db.collection("posts").add({
-                title: name,
+                title: currentDate,
                 owner: user.uid,
                 description: desc,
                 last_updated: firebase.firestore.FieldValue

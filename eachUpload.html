@@ -46,37 +46,23 @@
     <!------------------------------>
     <!-- Navbar -->
    
-     <nav id="navbarPlaceholder"></nav>
-     <div class="page-name">Personal Gallery</div>
-     <div class="back-button">
+    <nav id="navbarPlaceholder"></nav>
+    <div class="page-name">Post Info</div>
+    <div class="back-button">
         <a href="./main.html" class="label">Back to home</a>
-      </div>
-       <div class="container-fluid text-dark p-5">
-           <!-- Here is the container for cards  -->
-           
-    
-            <div class="container py-5">
-            <h1>Show My Posts <span id="name-goes-here"></span></h1>
-                <div id="myposts-go-here" class="row row-cols-auto">
-                </div>
-            </div>
+    </div>
+                
+    <div class="container">
+        <div id="titlebox">
+            <h1><span id="postTitle">this hike</span></h1>
         </div>
-    
-        <!-- Templates for general use, not displayed -->
-        <template id="postCardTemplate">
-            <div class="card py-2 mx-2 bg-light" style="width: 10rem;">
-                <img class="card-image card-img-top" src=" ..." alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-description">placeholder</p>
-                    <br>
-                    <a class="btn btn-secondary card-href" id="read-more">Read more ...</a>
-                    <i class="material-icons" id="delete-icon">delete</i>
-                </div>
-            </div>
-        </template>
-
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="imagebox">
+            <img id="postImage" src="" alt="Hike photo">
+        </div>
+        <div id="descbox">
+            <p id="postDescription" >teles</p>
+        </div>
+    </div>
     <!-- FOOTER -->
     <nav id="footerPlaceholder" style="background: rgba(255, 255, 255, 0.527); border: 0px solid black;"></nav>
     
@@ -88,7 +74,7 @@
     <!-- <script src="./scripts/script.js"></script> -->
     <script src="./scripts/firebaseAPI_TEAM32.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/gallery.js"></script>
+    <script src="./scripts/eachUpload.js"></script>
     <script src="./scripts/client.js"></script>
 
 </body>
