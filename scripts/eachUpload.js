@@ -1,5 +1,5 @@
 
-function displayHikeInformation(){
+function displayPosts(){
     //retreive the document id from the url
     let params = new URL(window.location.href) //get the url from the searbar
     let ID = params.searchParams.get("docID");
@@ -19,4 +19,4 @@ function displayHikeInformation(){
     )
 
 }
-displayHikeInformation();
+displayPosts();
