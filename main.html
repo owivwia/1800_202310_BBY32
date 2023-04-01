@@ -36,6 +36,7 @@
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
 
   <!-- Link to styles of your own -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./styles/style.css">
 
 </head>
@@ -56,6 +57,7 @@
       <hr>
       <div id="date-location-temp-description">
         <p>
+          <div id="weather-icon" style="zoom:250% ;"></div>
           <p><b>Today's Date: </b><span id="current_date"></span></p>
           <p><b>Current weather in <span id="city"></span>: </b> <span id="description"></span>,</p>
           <p><b>with a temperature of: </b><span id="temperature"></span></p>
@@ -67,7 +69,7 @@
       </div>
       <div class="creativity-task">
         <div class="checkbox">
-          <label><input type="checkbox" class="todo-checkbox" onchange="togglecheck(taskId)"/></label>
+          <i class="material-icons">check_box_outline_blank</i>
         </div>
         <h5 class="card-title">Creativity Challenge</h5>
         <p class="card-text">
@@ -76,7 +78,7 @@
       </div>
       <div class="physical-activity">
         <div class="checkbox">
-          <input type="checkbox" class="todo-checkbox" />
+          <i class="material-icons">check_box_outline_blank</i>
         </div>
         <h5 class="card-title">Physical Activity Challenge</h5>
         <p class="card-text">
@@ -88,7 +90,7 @@
       </div>
       <br>
       <hr>
-      <p>Reminder: <span id="message-goes-here"> </span></p>
+      <p><span id="message-goes-here"></span></p>
     </div>
     <br><br><br><br><br><br><br><br>
   </div>
