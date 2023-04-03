@@ -6,6 +6,21 @@ function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+var weather;
+
+const getData = async () => {
+  const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=Burnaby&appid=7d6d38173ae18bf5a612fcdf14342cd4");
+  const data = await response.json();
+  weather = data.weather[0].main.toLowerCase();
+  doAll();
+  return data;
+};
+
+(async () => {
+  await getData();
+  console.log(weather);
+})();
+
 function doAll() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -33,12 +48,12 @@ function doAll() {
             readCreativityTask(lastTaskId);
           } else {
             // If the last task date is not today's date, generate a new task ID and save it to the user's document
-            const newTaskId = randomIntFromInterval(1, 5).toString();
+            const newCreativityTaskId = randomIntFromInterval(1, 5).toString();
             currentUser.update({
-              lastTaskId: newTaskId,
+              lastTaskId: newCreativityTaskId,
               lastTaskDate: `${year}-${month}-${day}`
             }).then(() => {
-              readCreativityTask(newTaskId);
+              readCreativityTask(newCreativityTaskId);
             }).catch(error => {
               console.log("Error updating user document:", error);
             });
@@ -49,25 +64,26 @@ function doAll() {
             readPhysicalTask(lastTaskId);
           } else {
             // If the last task date is not today's date, generate a new task ID and save it to the user's document
-            const newTaskId = randomIntFromInterval(1, 5).toString();
+            const newPhysicalTaskId = randomIntFromInterval(1, 5).toString();
             currentUser.update({
-              lastTaskId: newTaskId,
+              lastTaskId: newPhysicalTaskId,
               lastTaskDate: `${year}-${month}-${day}`
             }).then(() => {
-              readPhysicalTask(newTaskId);
+              readPhysicalTask(newPhysicalTaskId);
             }).catch(error => {
               console.log("Error updating user document:", error);
             });
           }
 
+          var rndMsg = randomIntFromInterval(1, 5).toString();
           if (weather === "rain" || weather === "drizzle" || weather == "thunderstorm") {
-            readMessageRainy(rndInt1.toString());
+            readMessageRainy(rndMsg.toString());
           } else if (weather === "clear" || weather === "clouds") {
-            readMessageSunny(rndInt1.toString());
+            readMessageSunny(rndMsg.toString());
           } else if (weather === "snow") {
-            readMessageSnowy(rndInt1.toString());
+            readMessageSnowy(rndMsg.toString());
           } else {
-            readMessageExtreme(rndInt1.toString());
+            readMessageExtreme(rndMsg.toString());
           }
         } else {
           console.log("User document not found");
@@ -106,20 +122,6 @@ function getNameFromAuth() {
         }
     });
 }
-
-var weather;
-
-const getData = async () => {
-  const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=Burnaby&appid=7d6d38173ae18bf5a612fcdf14342cd4");
-  const data = await response.json();
-  weather = data.weather[0].main.toLowerCase();
-  return data;
-};
-
-(async () => {
-  await getData();
-  console.log(weather);
-})();
 
 function readMessageRainy(msgId) {
   db.collection("raining").doc(msgId)                                                      
