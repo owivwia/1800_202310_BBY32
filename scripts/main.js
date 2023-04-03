@@ -2,7 +2,7 @@ var currentUser;
 var userId;
 
 // min and max included 
-function randomIntFromInterval(min, max) { 
+function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
@@ -20,6 +20,10 @@ const getData = async () => {
   await getData();
   console.log(weather);
 })();
+
+var newCreativityTaskId;
+var newPhysicalTaskId;
+
 
 function doAll() {
   firebase.auth().onAuthStateChanged(user => {
@@ -40,18 +44,20 @@ function doAll() {
       currentUser.get().then(doc => {
         if (doc.exists) {
           const userData = doc.data();
-          const lastTaskId = userData.lastTaskId;
-          const lastTaskDate = userData.lastTaskDate;
+          const lastCreativityTaskId = userData.lastCreativityTaskId;
+          const lastPhysicalTaskId = userData.lastPhysicalTaskId;
+          const lastCreativityTaskDate = userData.lastCreativityTaskDate;
+          const lastPhysicalTaskDate = userData.lastPhysicalTaskDate;
 
           // If the last task date matches today's date, use the same task ID
-          if (lastTaskDate === `${year}-${month}-${day}` && lastTaskId) {
-            readCreativityTask(lastTaskId);
+          if (lastCreativityTaskDate === `${year}-${month}-${day}` && lastCreativityTaskId) {
+            readCreativityTask(lastCreativityTaskId);
           } else {
             // If the last task date is not today's date, generate a new task ID and save it to the user's document
-            const newCreativityTaskId = randomIntFromInterval(1, 5).toString();
+            newCreativityTaskId = randomIntFromInterval(1, 6).toString();
             currentUser.update({
-              lastTaskId: newCreativityTaskId,
-              lastTaskDate: `${year}-${month}-${day}`
+              lastCreativityTaskId: newCreativityTaskId,
+              lastCreativityTaskDate: `${year}-${month}-${day}`
             }).then(() => {
               readCreativityTask(newCreativityTaskId);
             }).catch(error => {
@@ -60,14 +66,14 @@ function doAll() {
           }
 
           // If the last task date matches today's date, use the same task ID
-          if (lastTaskDate === `${year}-${month}-${day}` && lastTaskId) {
-            readPhysicalTask(lastTaskId);
+          if (lastPhysicalTaskDate === `${year}-${month}-${day}` && lastPhysicalTaskId) {
+            readPhysicalTask(lastPhysicalTaskId);
           } else {
             // If the last task date is not today's date, generate a new task ID and save it to the user's document
-            const newPhysicalTaskId = randomIntFromInterval(1, 5).toString();
+            newPhysicalTaskId = randomIntFromInterval(1, 6).toString();
             currentUser.update({
-              lastTaskId: newPhysicalTaskId,
-              lastTaskDate: `${year}-${month}-${day}`
+              lastPhysicalTaskId: newPhysicalTaskId,
+              lastPhysicalTaskDate: `${year}-${month}-${day}`
             }).then(() => {
               readPhysicalTask(newPhysicalTaskId);
             }).catch(error => {
@@ -102,72 +108,174 @@ doAll();
 
 
 function getNameFromAuth() {
-    firebase.auth().onAuthStateChanged(user => {
-        // Check if a user is signed in:
-        if (user) {
-            // Do something for the currently logged-in user here: 
-            console.log(user.uid); //print the uid in the browser console
-            console.log(user.displayName);  //print the user name in the browser console
-            user_Name = user.displayName;
+  firebase.auth().onAuthStateChanged(user => {
+    // Check if a user is signed in:
+    if (user) {
+      // Do something for the currently logged-in user here: 
+      console.log(user.uid); //print the uid in the browser console
+      console.log(user.displayName); //print the user name in the browser console
+      user_Name = user.displayName;
 
-            //method #1:  insert with JS
-            //document.getElementById("name-goes-here").innerText = userName;    
-            //method #2:  insert using jquery
-            //$("#name-goes-here").text(userName); //using jquery
-            //method #3:  insert using querySelector
-            document.querySelector("#name-goes-here").innerText = user_Name
+      //method #1:  insert with JS
+      //document.getElementById("name-goes-here").innerText = userName;    
+      //method #2:  insert using jquery
+      //$("#name-goes-here").text(userName); //using jquery
+      //method #3:  insert using querySelector
+      document.querySelector("#name-goes-here").innerText = user_Name
 
-        } else {
-            // No user is signed in.
-        }
-    });
+    } else {
+      // No user is signed in.
+    }
+  });
 }
 
 function readMessageRainy(msgId) {
-  db.collection("raining").doc(msgId)                                                      
-    .onSnapshot(rainingDoc => {                                                           
-         console.log("current document data: " + rainingDoc.data());                         
-         document.getElementById("message-goes-here").innerHTML = rainingDoc.data().msg;      
+  db.collection("raining").doc(msgId)
+    .onSnapshot(rainingDoc => {
+      console.log("current document data: " + rainingDoc.data());
+      document.getElementById("message-goes-here").innerHTML = rainingDoc.data().msg;
     })
-} 
+}
 
 function readMessageSunny(msgId) {
-  db.collection("sunny").doc(msgId)                                                      
-    .onSnapshot(sunnyDoc => {                                                           
-         console.log("current document data: " + sunnyDoc.data());                         
-         document.getElementById("message-goes-here").innerHTML = sunnyDoc.data().msg;      
+  db.collection("sunny").doc(msgId)
+    .onSnapshot(sunnyDoc => {
+      console.log("current document data: " + sunnyDoc.data());
+      document.getElementById("message-goes-here").innerHTML = sunnyDoc.data().msg;
     })
 }
 
 function readMessageSnowy(msgId) {
-  db.collection("snowy").doc(msgId)                                                      
-    .onSnapshot(snowyDoc => {                                                           
-        console.log("current document data: " + snowyDoc.data());                         
-        document.getElementById("message-goes-here").innerHTML = snowyDoc.data().msg;      
+  db.collection("snowy").doc(msgId)
+    .onSnapshot(snowyDoc => {
+      console.log("current document data: " + snowyDoc.data());
+      document.getElementById("message-goes-here").innerHTML = snowyDoc.data().msg;
     })
 }
 
 function readMessageExtreme(msgId) {
-  db.collection("extreme").doc(msgId)                                                      
-    .onSnapshot(extremeDoc => {                                                           
-        console.log("current document data: " + extremeDoc.data());                         
-        document.getElementById("message-goes-here").innerHTML = extremeDoc.data().msg;      
+  db.collection("extreme").doc(msgId)
+    .onSnapshot(extremeDoc => {
+      console.log("current document data: " + extremeDoc.data());
+      document.getElementById("message-goes-here").innerHTML = extremeDoc.data().msg;
     })
 }
 
 function readCreativityTask(creativityId) {
-  db.collection("creativity tasks").doc(creativityId)                                                     
-    .onSnapshot(taskDoc => {                                                           
-         console.log("current document data: " + taskDoc.data());                         
-         document.getElementById("creativity-task-goes-here").innerHTML = taskDoc.data().Task;      
+  db.collection("creativity tasks").doc(creativityId)
+    .onSnapshot(taskDoc => {
+      console.log("current document data: " + taskDoc.data());
+      document.getElementById("creativity-task-goes-here").innerHTML = taskDoc.data().Task;
     })
 }
 
 function readPhysicalTask(physicalId) {
-  db.collection("physical tasks").doc(physicalId)                                           
-    .onSnapshot(taskDoc => {                                                          
-         console.log("current document data: " + taskDoc.data());                       
-         document.getElementById("physical-task-goes-here").innerHTML = taskDoc.data().task;      
+  db.collection("physical tasks").doc(physicalId)
+    .onSnapshot(taskDoc => {
+      console.log("current document data: " + taskDoc.data());
+      document.getElementById("physical-task-goes-here").innerHTML = taskDoc.data().task;
     })
 }
 
+// // Select the refresh button element
+// const refreshButton = document.getElementById("refresh-tasks");
+
+// // Add an event listener to the button
+// refreshButton.addEventListener("click", () => {
+//   firebase.auth().onAuthStateChanged(user => {
+//     if (user) {
+
+
+//       currentUser = db.collection("users").doc(user.uid);
+//       console.log(currentUser);
+
+//       currentUser.get().then(doc => {
+//         if (doc.exists) {
+//           // Generate new task IDs and save them to Firestore
+//           const newCreativityTaskId = randomIntFromInterval(1, 6).toString();
+//           const newPhysicalTaskId = randomIntFromInterval(1, 6).toString();
+//           const year = new Date().getFullYear();
+//           const month = new Date().getMonth() + 1;
+//           const day = new Date().getDate();
+
+//           currentUser.update({
+//             lastCreativityTaskId: newCreativityTaskId,
+//             lastCreativityTaskDate: `${year}-${month}-${day}`,
+//           }).catch(error => {
+//             console.log("Error updating user document:", error);
+//           });
+
+//           currentUser.update({
+//             lastPhysicalTaskId: newPhysicalTaskId,
+//             lastPhysicalTaskDate: `${year}-${month}-${day}`
+//           }).catch(error => {
+//             console.log("Error updating user document:", error);
+//           });
+
+//           doAll();
+//         }
+//       })
+//     }
+//   })
+// });
+
+// Select the refresh button element
+const refreshButton = document.getElementById("refresh-tasks");
+
+// Add an event listener to the button
+refreshButton.addEventListener("click", () => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const currentUser = db.collection("users").doc(user.uid);
+
+      // Get the last refresh date from the user document
+      currentUser.get().then(doc => {
+        if (doc.exists) {
+          const data = doc.data();
+          const lastRefreshDate = data.lastRefreshDate;
+          const currentDate = new Date().toISOString().substr(0, 10);
+
+          // Check if the last refresh date is the same as the current date
+          if (lastRefreshDate === currentDate) {
+            console.log("Button can only be clicked once per day");
+            alert("Tasks can only be refreshed once per day! You've already refreshed tasks for today!");
+          } else {
+            // Update the last refresh date in the user document
+            currentUser.update({
+              lastRefreshDate: currentDate
+            }).then(() => {
+              // Generate new task IDs and save them to Firestore
+              const newCreativityTaskId = randomIntFromInterval(1, 6).toString();
+              const newPhysicalTaskId = randomIntFromInterval(1, 6).toString();
+              const year = new Date().getFullYear();
+              const month = new Date().getMonth() + 1;
+              const day = new Date().getDate();
+
+              currentUser.update({
+                lastCreativityTaskId: newCreativityTaskId,
+                lastCreativityTaskDate: `${year}-${month}-${day}`,
+              }).catch(error => {
+                console.log("Error updating user document:", error);
+              });
+
+              currentUser.update({
+                lastPhysicalTaskId: newPhysicalTaskId,
+                lastPhysicalTaskDate: `${year}-${month}-${day}`
+              }).catch(error => {
+                console.log("Error updating user document:", error);
+              });
+
+              doAll();
+            }).catch(error => {
+              console.log("Error updating user document:", error);
+            });
+          }
+        } else {
+          console.log("User document not found");
+        }
+      }).catch(error => {
+        console.log("Error getting user document:", error);
+      });
+    }
+  })
+});
