@@ -36,9 +36,10 @@
   font-weight:bold;
 }
 
-
 #refresh-tasks , #upload-tasks {
   display:inline-block;
+  margin: 10px;
+  padding: 20px;
 }
 
 #text1 {

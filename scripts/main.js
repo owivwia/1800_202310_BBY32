@@ -177,48 +177,6 @@ function readPhysicalTask(physicalId) {
     })
 }
 
-// // Select the refresh button element
-// const refreshButton = document.getElementById("refresh-tasks");
-
-// // Add an event listener to the button
-// refreshButton.addEventListener("click", () => {
-//   firebase.auth().onAuthStateChanged(user => {
-//     if (user) {
-
-
-//       currentUser = db.collection("users").doc(user.uid);
-//       console.log(currentUser);
-
-//       currentUser.get().then(doc => {
-//         if (doc.exists) {
-//           // Generate new task IDs and save them to Firestore
-//           const newCreativityTaskId = randomIntFromInterval(1, 6).toString();
-//           const newPhysicalTaskId = randomIntFromInterval(1, 6).toString();
-//           const year = new Date().getFullYear();
-//           const month = new Date().getMonth() + 1;
-//           const day = new Date().getDate();
-
-//           currentUser.update({
-//             lastCreativityTaskId: newCreativityTaskId,
-//             lastCreativityTaskDate: `${year}-${month}-${day}`,
-//           }).catch(error => {
-//             console.log("Error updating user document:", error);
-//           });
-
-//           currentUser.update({
-//             lastPhysicalTaskId: newPhysicalTaskId,
-//             lastPhysicalTaskDate: `${year}-${month}-${day}`
-//           }).catch(error => {
-//             console.log("Error updating user document:", error);
-//           });
-
-//           doAll();
-//         }
-//       })
-//     }
-//   })
-// });
-
 // Select the refresh button element
 const refreshButton = document.getElementById("refresh-tasks");
 
@@ -279,3 +237,115 @@ refreshButton.addEventListener("click", () => {
     }
   })
 });
+
+var creativityTaskCompleted;
+
+const creativityCheckbox = document.getElementById("creativity-checkbox");
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    const currentUser = db.collection("users").doc(user.uid);
+
+    const creativityCheckbox = document.querySelector(".creativity-task .checkbox i");
+
+    creativityTaskCompleted = localStorage.getItem("creativityTaskCompleted") === "true";
+
+    // Update the checked status of the checkbox based on the value of the creativityTaskCompleted boolean
+    if (creativityTaskCompleted) {
+      creativityCheckbox.innerText = "check_box";
+    } else {
+      creativityCheckbox.innerText = "check_box_outline_blank";
+    }
+
+    // Add an event listener to the checkbox
+    creativityCheckbox.addEventListener("click", () => {
+      // Toggle the value of the creativityTaskCompleted boolean
+      creativityTaskCompleted = !creativityTaskCompleted;
+
+      // Update the creativityTaskCompleted boolean in the currentUser document
+      currentUser.update({
+        creativityTaskCompleted: creativityTaskCompleted
+      }).then(() => {
+        console.log("Creativity task completed status updated in Firestore.");
+      }).catch(error => {
+        console.log("Error updating creativity task completed status in Firestore:", error);
+      });
+
+      // Update the checked status of the checkbox based on the new value of the creativityTaskCompleted boolean
+      if (creativityTaskCompleted) {
+        creativityCheckbox.innerText = "check_box";
+      } else {
+        creativityCheckbox.innerText = "check_box_outline_blank";
+      }
+
+      if (checkTasksCompleted()) {
+        // Show a congratulatory pop-up message
+        alert("Congratulations! You have completed both daily challenges!");
+      }
+
+      // Store the value of the creativityTaskCompleted boolean in local storage
+      localStorage.setItem("creativityTaskCompleted", creativityTaskCompleted.toString());
+    })
+  }
+});
+
+var physicalTaskCompleted;
+
+const physicalCheckbox = document.getElementById("physical-checkbox");
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    const currentUser = db.collection("users").doc(user.uid);
+
+    const physicalCheckbox = document.querySelector(".physical-activity .checkbox i");
+
+    // Get the current value of the physicalTaskCompleted boolean from Firestore
+    currentUser.get().then(doc => {
+      if (doc.exists) {
+        physicalTaskCompleted = doc.data().physicalTaskCompleted;
+
+        // Update the checked status of the checkbox based on the value of the physicalTaskCompleted boolean
+        if (physicalTaskCompleted) {
+          physicalCheckbox.innerText = "check_box";
+        } else {
+          physicalCheckbox.innerText = "check_box_outline_blank";
+        }
+
+        // Add an event listener to the checkbox
+        physicalCheckbox.addEventListener("click", () => {
+          // Toggle the value of the physicalTaskCompleted boolean
+          physicalTaskCompleted = !physicalTaskCompleted;
+
+          // Update the physicalTaskCompleted boolean in the currentUser document
+          currentUser.update({
+            physicalTaskCompleted: physicalTaskCompleted
+          }).then(() => {
+            console.log("Physical task completed status updated in Firestore.");
+          }).catch(error => {
+            console.log("Error updating physical task completed status in Firestore:", error);
+          });
+
+          // Update the checked status of the checkbox based on the new value of the physicalTaskCompleted boolean
+          if (physicalTaskCompleted) {
+            physicalCheckbox.innerText = "check_box";
+          } else {
+            physicalCheckbox.innerText = "check_box_outline_blank";
+          }
+
+          if (checkTasksCompleted()) {
+            // Show a congratulatory pop-up message
+            alert("Congratulations! You have completed both daily challenges!");
+          }
+          
+        });
+      }
+    }).catch(error => {
+      console.log("Error retrieving physical task completed status from Firestore:", error);
+    });
+  }
+});
+
+// Function to check if both tasks have been completed
+function checkTasksCompleted() {
+  return physicalTaskCompleted && creativityTaskCompleted;
+}
