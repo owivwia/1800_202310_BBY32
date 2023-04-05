@@ -1,3 +1,13 @@
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
 .background {
     background-image: url(../images/snowbackground.jpg);
     background-position: top;
@@ -19,10 +29,14 @@
 
 .main-task-cards > h5 {
   text-align: left;
-}
+}  
 
 .page-name{
   font-weight:bold;
+}
+
+.page-name-text{
+  font-size: 15px;
 }
 
 /*main.html styling*/
@@ -82,10 +96,14 @@
   height: 300px;
 }
 
-footer {
+.footer {
+  grid-area: footer;
+  display: flex;
   position: fixed;
-  bottom: -25px;
-  height: 125px;
+  bottom: 0px;
+  left: 0px;
+  height: 100px;
+  justify-content: center;
   width: 100%;
   background-color: white;
   font-size: small;
@@ -97,16 +115,14 @@ footer {
   background-color: #FDFD96;
   border: 1px solid black;
   padding: 2%;
-  width: 60%;
-  margin-left: 20%;
+  width: 100%;
 }
 
 .physical-activity {
   background-color: #FF6961;  
   border: 1px solid black;
   padding: 2%;
-  width: 60%;
-  margin-left: 20%;   
+  width: 100%;
 }
 
 .checkbox {
@@ -137,6 +153,9 @@ input.todo-checkbox {
 
 #date-location-temp-description {
   font-size: 3vmin;
+  color: black;
+  display: flex; 
+  justify-content: center;
 }
 
 /* temperature.js */
@@ -153,17 +172,17 @@ body {
 }
 
 .back-button {
-	position: absolute;
-  text-indent: -15px;
-  padding: 5px 0 5px 10px;
-  width: 12vmin;/* modified by label length */
+	
+  text-indent: 0px;
+  padding: 5px 0 5px 5px;
+  width: 75px;/* modified by label length */
 	overflow: auto;
 }
 .label {
 	display: block;
   width: auto;
   line-height: 3vmin;
-  font-size: 1vmin;
+  font-size: 15px;
   font-weight: 900;
   font-family: helvetica, sans-serif;
   color: #fff;
@@ -201,4 +220,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.display-4 {
+  color: black;
+  display: flex; 
+  justify-content: center;
 }

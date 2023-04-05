@@ -50,18 +50,16 @@
 
   <nav id="navbarPlaceholder"></nav>
 
-  <div class="page-name">Home</div>
-  <div class="container-fluid text-dark p-5">
-    <div class="container">
+  <div class="page-name"><p class="page-name-text">Home</p></div>
+  <div>
+    <div id="main" style="background: rgba(255, 255, 255, 0.527); border: 3px solid black;">
       <h1 class="display-4" style="color: black;">Hello, <span id="name-goes-here"></span></h1>
       <hr>
+      <div id="weather-icon" style="zoom:250% ; display: flex; justify-content: center;"></div>
       <div id="date-location-temp-description">
-        <p>
-          <div id="weather-icon" style="zoom:250% ;"></div>
           <p><b>Today's Date: </b><span id="current_date"></span></p>
           <p><b>Current weather in <span id="city"></span>: </b> <span id="description"></span>,</p>
           <p><b>with a temperature of: </b><span id="temperature"></span></p>
-        </p>
       </div>
       <br>
       <div id="todays-tasks">
@@ -93,7 +91,7 @@
       <hr>
       <p><span id="message-goes-here"></span></p>
     </div>
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
   </div>
 
   <!-- FOOTER -->
