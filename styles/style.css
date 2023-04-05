@@ -227,4 +227,11 @@ body {
   color: black;
   display: flex; 
   justify-content: center;
+  align-items: center;
+}
+
+#messagehere {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
