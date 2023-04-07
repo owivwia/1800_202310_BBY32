@@ -128,10 +128,9 @@ html,body
 .checkbox {
   position: relative;
   height: 100%;
-  padding: 5%;
   float: left;
-  padding: 4%;
 }
+
 
 input.todo-checkbox {
   width: 2rem;
@@ -214,6 +213,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 #descbox {
