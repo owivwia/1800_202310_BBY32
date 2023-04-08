@@ -8,6 +8,23 @@ function randomIntFromInterval(min, max) {
 
 var weather;
 
+// Get the user's time zone offset in minutes
+const timezoneOffset = new Date().getTimezoneOffset();
+
+// Create a new date object and adjust it to the user's time zone
+const now = new Date();
+const userDate = new Date(now.getTime() - (timezoneOffset * 60 * 1000));
+
+// Format the date as desired (for example, as "MM/DD/YYYY")
+const year = userDate.getFullYear();
+const month = String(userDate.getMonth() + 1).padStart(2, '0');
+const day = String(userDate.getDate()).padStart(2, '0');
+const formattedDate = `${month}/${day}/${year}`;
+
+// Display the date on the website
+document.getElementById("current_date").innerHTML = formattedDate;
+
+
 const getData = async () => {
   const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=Burnaby&appid=7d6d38173ae18bf5a612fcdf14342cd4");
   const data = await response.json();
