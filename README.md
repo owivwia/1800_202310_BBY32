@@ -29,13 +29,12 @@ Here are the steps ...
 ## 5. Known Bugs and Limitations
 Here are some known bugs/limitations:
 * Hamburger menu doesn't minimize once expanded.
-* ...
 
 ## 6. Features for Future
 What we'd like to build in the future:
 * A Task History page that shows the user all the tasks that they've already completed and when they completed it.
 * Background that changes according to different weather conditions.
-* ...
+* A bookmark feature to save posts that the user likes.
 	
 ## 7. Contents of Folder
 Content of the project folder:
