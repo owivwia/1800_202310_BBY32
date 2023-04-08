@@ -1,4 +1,4 @@
-# Project Title
+# Two Do's App
 
 ## 1. Project Description 
 This browser-based web application was made to ease anxiety and combat boredom indoors through the encouragement of physical and creative activities during extreme weather conditions.
